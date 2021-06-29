@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Kakao 지도 시작하기</title>
+	<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=7c8813225e2ee056ab75aed39e98847d&libraries=services,clusterer,drawing"></script> 
+	<script src="http://developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	
+	
+<body style="margin:0px;padding:0px;">
+<div id="currentMap" style="position:relative; width:100%; height: calc(100vw);">
+	<div id="map" style="postition:absolute; overflow:hidden; width:100%;height:100%;"></div>
+
+</div>
+	<script>
+		var bgMapCont = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		}; 
+		var mapApi = new kakao.maps.Map(bgMapCont , options); 
+		 
+		
+		// 해당 지점의 주차장 정보 조회 
+		function setBuldinfo(sn ){
+			
+			var infoLayer = {}; 
+			infoLayer.jsonUrl = "/mpis/pub/eai/list/buldinfo.do";
+			infoLayer.buldSn = sn;
+			
+			$.ajax({
+			    url: '/mpis/getMpisData.do',
+			    type: 'POST',
+			    contentType: 'application/json; carset=UTF-8',
+			    dataType: 'json',
+			    data:  infoLayer ,
+			    async: false, 
+			    beforeSend: function(xhr) { 
+			    	 
+			    },
+			    success: function(result) {
+			    	 
+			    	var json = JSON.parse(result);
+			    	console.log(json);
+			    	 
+			    },
+			    error: function(jxhr, textStatus) {
+			    	//if(fn_error) fn_error(jxhr, textStatus)
+			    	 
+			    },
+			    complete: function(xhr, status) {
+			    	///if(fn_complete) fn_complete(xhr, status);
+			    	 
+			    }
+			}); 
+			
+			 
+		}
+		 
+		function getParkginSearch2( topleft, bottomright ){
+			 
+			var infoLayer = {}; 
+			infoLayer.jsonUrl = "/mpis/pub/eai/list/box2.do";
+			infoLayer.sGpsX = "126.99584632422851";
+			infoLayer.eGpsX = "127.00211667363638";
+			infoLayer.sGpsY = "37.55929372909084";
+			infoLayer.eGpsY = "37.56717750215049";
+
+			
+			$.ajax({
+				url: '/mpis/getMpisData2.do',
+			    async:true,// false 일 경우 동기 요청으로 변경
+			    type:'POST', // GET, PUT
+			    data: infoLayer,// 전송할 데이터
+			    dataType:'text',// xml, json, script, html
+			    beforeSend:function(jqXHR) {},// 서버 요청 전 호출 되는 함수 return false; 일 경우 요청 중단
+			    success:function(jqXHR) {
+			    	console.log(jqXHR); 
+			    },// 요청 완료 시
+			    error:function(jqXHR) {},// 요청 실패.
+			    complete:function(jqXHR) {}// 요청의 실패, 성공과 상관 없이 완료 될 경우 호출
+			});
+
+
+		 
+			 
+		}
+		setBuldinfo(14692);
+		 
+		getParkginSearch2(0, 0);
+		//window.location.href="search.html";
+		 
+	</script>
+
+<div style="position: absolute; padding:10px; top:10px; width:100%; height:40px; background-color:#aaa; z-index:99999;">
+<input type="text" style="width:100%; height:20px;" id="searchKey">
+<a href="search.html" data-transition="flip" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+</div>	
+	
+</body>
+</html>
+ 
