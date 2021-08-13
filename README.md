@@ -14,10 +14,11 @@
 ![11](https://user-images.githubusercontent.com/66085260/129332200-80b2e829-adb6-470e-8e4f-1ada40403114.png)
 
 </br></br></br></br></br></br>
-
 ![22](https://user-images.githubusercontent.com/66085260/129333017-47387caa-765d-43a4-b5aa-15847856edd6.png)
+
 <h1>검색버튼을 누를시 슬라이더가 또 위에서 내려옴 </h1>
 </br></br></br></br></br></br>
+
 ![333](https://user-images.githubusercontent.com/66085260/129333025-93478fd1-a898-43b4-8ac2-295fba278a96.png)
 
 </br></br></br></br></br></br>
